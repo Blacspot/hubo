@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hubo/piece.dart';
+import 'package:hubo/pixel.dart';
+import 'package:hubo/values.dart';
 
 class GameBoard extends StatefulWidget {
   const GameBoard({super.key});
@@ -12,6 +15,8 @@ class _GameBoardState extends State<GameBoard> {
   int rowLength = 10;
   int collength = 15;
 
+ Piece currentPiece = Piece(type: Tetromino.L);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,12 +26,13 @@ class _GameBoardState extends State<GameBoard> {
         physics: const NeverScrollableScrollPhysics(),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: rowLength),
-         itemBuilder: (context, index) => Center(
-          child: Text(
-            index.toString(),
-          style: const TextStyle(color: Colors.white),
-          ),
-         )),
+         itemBuilder: (context, index) {
+
+         return Pixel(color: Colors.grey[900],
+         child: index,
+         );
+         },
+         ),
     );
   }
 }
