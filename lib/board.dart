@@ -27,10 +27,17 @@ class _GameBoardState extends State<GameBoard> {
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: rowLength),
          itemBuilder: (context, index) {
-
-         return Pixel(color: Colors.grey[900],
+          if (currentPiece.position.contains(index)) {
+         return Pixel(
+          color: Colors.yellow,
          child: index,
          );
+          } else {
+            return Pixel(
+              color: Colors.grey[900],
+              child: index,
+            );
+          }
          },
          ),
     );
