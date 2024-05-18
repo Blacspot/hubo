@@ -1,3 +1,7 @@
+// ignore_for_file: prefer_const_constructors
+
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:hubo/piece.dart';
 import 'package:hubo/pixel.dart';
@@ -12,10 +16,38 @@ class GameBoard extends StatefulWidget {
 
 class _GameBoardState extends State<GameBoard> {
 
-  int rowLength = 10;
-  int collength = 15;
 
- Piece currentPiece = Piece(type: Tetromino.L);
+ Piece currentPiece = Piece(type: Tetromino.T);
+
+ @override
+ void initState(){
+  super.initState();
+
+  startGame();
+ }
+
+ void startGame() {
+  currentPiece.initializePiece();
+
+  Duration frameRate = Duration(milliseconds: 800);
+  gameLoop(frameRate);
+ }
+
+ void gameLoop(Duration frameRate) {
+  Timer.periodic(
+    frameRate,
+    (timer) {
+      setState(() {
+        currentPiece.movePiece(Direction.down);
+      });
+    }
+  );
+ }
+
+ bool checkCollision(Direction direction) {
+  for (int i = 0; i < currentPiece.position.length; i++) {
+  }
+ }
 
   @override
   Widget build(BuildContext context) {
