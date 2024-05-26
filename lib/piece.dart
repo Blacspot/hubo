@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'values.dart';
 
 class Piece{
@@ -7,6 +9,11 @@ class Piece{
   Piece({required this.type});
 
   List<int> position = [];
+
+  Color get color {
+    return tetrominoColors[type] ??
+      const Color(0XFFFFFFFF);
+  }
 
   void initializePiece(){
     switch(type){
@@ -85,6 +92,74 @@ class Piece{
       position [i] += 1;
       }
       default:
+  }
+}
+
+int rotationState = 1;
+
+void rotatePiece() {
+  List<int> newPosition = [];
+
+  switch (type) {
+    case Tetromino.L:
+    switch (rotationState) {
+      case 0:
+
+      newPosition = [
+        position[1] - rowLength,
+        position[1],
+        position[1] + rowLength,
+        position[1] + rowLength,
+      ];
+
+      position = newPosition;
+
+      rotationState = (rotationState + 1) % 4;
+      break;
+      case 1:
+
+      newPosition = [
+        position[1] - 1,
+        position[1],
+        position[1] + 1,
+        position[1] + rowLength - 1,
+      ];
+
+      position = newPosition;
+
+      rotationState = (rotationState + 1) % 4;
+      break;
+
+      case 2:
+
+      newPosition = [
+        position[1] + rowLength,
+        position[1],
+        position[1] - rowLength,
+        position[1] - rowLength -1,
+      ];
+
+      position = newPosition;
+
+      rotationState = (rotationState + 1) % 4;
+      break;
+
+      case 3:
+
+      newPosition = [
+        position[1] - rowLength + 1,
+        position[1],
+        position[1] + 1,
+        position[1] - 1,
+      ];
+
+      position = newPosition;
+
+      rotationState = (rotationState + 1) % 4;
+      break;
+    }
+    break;
+    default:
   }
 }
 }
