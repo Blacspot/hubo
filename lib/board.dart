@@ -17,6 +17,7 @@ List<List<Tetromino?>>  gameBoard = List.generate(
      (j) => null,
    ),
    );
+
 class GameBoard extends StatefulWidget {
   const GameBoard({super.key});
 
@@ -50,6 +51,7 @@ class _GameBoardState extends State<GameBoard> {
       setState(() {
 
         checkLanding();
+
         currentPiece.movePiece(Direction.down);
       });
     }
@@ -81,7 +83,9 @@ class _GameBoardState extends State<GameBoard> {
 void checkLanding(){
 
   if (checkCollision(Direction.down)) {
+
     for (int i = 0; i < currentPiece.position.length; i++) {
+
     int row = (currentPiece.position[i] / rowLength).floor();
     int col = currentPiece.position[i] % rowLength;
     if (row>=0 && col>=0){
